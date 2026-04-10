@@ -11,7 +11,7 @@ const categories = ['Semua', 'Bakmi Kuah', 'Bakmi Goreng', 'Pelengkap'];
 
 const items = [
   {
-    id: 1, name: 'Bakmi Ayam Original', cat: 'Bakmi Kuah', price: '35.000',
+    id: 1, name: 'Bakmi Ayam Original', cat: 'Bakmi Kuah', price: '0.000',
     desc: 'Mie segar, ayam cincang, jamur, kuah kaldu bening',
     longDesc: 'Mie segar buatan sendiri dengan topping ayam cincang berbumbu, jamur shiitake, dan kuah kaldu bening yang dimasak 6 jam. Disajikan hangat dengan taburan bawang goreng dan daun bawang.',
     img: p1, badge: 'Best Seller', big: true, discount: null, rating: 5,
@@ -26,7 +26,7 @@ const items = [
     ],
   },
   {
-    id: 2, name: 'Bakmi Ayam Spesial', cat: 'Bakmi Kuah', price: '42.000',
+    id: 2, name: 'Bakmi Ayam Spesial', cat: 'Bakmi Kuah', price: '0.000',
     desc: 'Ayam panggang, pangsit goreng, kuah kaldu sapi pekat',
     longDesc: 'Versi spesial dengan ayam panggang berbumbu kecap, pangsit goreng renyah, dan kuah kaldu sapi pekat yang kaya rasa. Pilihan sempurna untuk makan siang yang memuaskan.',
     img: p2, badge: 'Spesial', big: false, discount: null, rating: 5,
@@ -41,7 +41,7 @@ const items = [
     ],
   },
   {
-    id: 3, name: 'Bakmi Kuah Baso', cat: 'Bakmi Kuah', price: '38.000',
+    id: 3, name: 'Bakmi Kuah Baso', cat: 'Bakmi Kuah', price: '0.000',
     desc: 'Baso sapi kenyal, sayuran segar, kuah gurih',
     longDesc: 'Perpaduan mie segar dengan baso sapi kenyal buatan sendiri, sayuran segar, dan kuah gurih yang menyegarkan. Cocok untuk semua usia.',
     img: p3, badge: null, big: false, discount: null, rating: 4,
@@ -56,7 +56,7 @@ const items = [
     ],
   },
   {
-    id: 4, name: 'Bakmi Goreng', cat: 'Bakmi Goreng', price: '36.000',
+    id: 4, name: 'Bakmi Goreng', cat: 'Bakmi Goreng', price: '0.000',
     desc: 'Bumbu rahasia, telur mata sapi, aroma wok yang khas',
     longDesc: 'Mie goreng dengan bumbu rahasia turun-temurun, dimasak di atas wok panas dengan aroma smoky yang khas. Disajikan dengan telur mata sapi dan acar timun.',
     img: p4, badge: 'Favorit', big: false, discount: 10, rating: 5,
@@ -71,7 +71,7 @@ const items = [
     ],
   },
   {
-    id: 5, name: 'Pangsit Goreng', cat: 'Pelengkap', price: '18.000',
+    id: 5, name: 'Pangsit Goreng', cat: 'Pelengkap', price: '0.000',
     desc: 'Kulit renyah, isi ayam & udang, cocol saus spesial',
     longDesc: 'Pangsit dengan kulit tipis renyah, isi campuran ayam dan udang segar berbumbu. Disajikan dengan saus cocol spesial berbahan dasar kecap dan cabai.',
     img: p5, badge: null, big: false, discount: null, rating: 4,
@@ -86,7 +86,7 @@ const items = [
     ],
   },
   {
-    id: 6, name: 'Bakmi Komplit', cat: 'Bakmi Kuah', price: '55.000',
+    id: 6, name: 'Bakmi Komplit', cat: 'Bakmi Kuah', price: '0.000',
     desc: 'Ayam, baso, pangsit, chasiu — semua dalam satu mangkuk',
     longDesc: 'Satu mangkuk berisi semua yang terbaik: mie segar, ayam panggang, baso sapi, pangsit goreng, dan chasiu babi/ayam. Pengalaman bakmi paling lengkap yang bisa Anda nikmati.',
     img: p6, badge: 'Premium', big: true, discount: null, rating: 5,

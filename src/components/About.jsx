@@ -12,10 +12,10 @@ const stats = [
 ];
 
 const timeline = [
-  { year: '2009', title: 'Awal Mula',       desc: 'Warung kecil di sudut Kertanegara dengan satu resep bakmi turun-temurun.' },
-  { year: '2014', title: 'Berkembang',      desc: 'Pindah ke lokasi lebih besar, menu bertambah, pelanggan setia terus bertumbuh.' },
-  { year: '2019', title: 'Dikenal Luas',    desc: 'Masuk daftar rekomendasi kuliner Jakarta, ribuan ulasan bintang lima.' },
-  { year: '2024', title: 'Kini & Selamanya', desc: 'Tetap setia pada resep asli, terus berinovasi untuk generasi berikutnya.' },
+  { year: '2026', title: 'Awal Mula',       desc: 'Warung kecil di sudut Kertanegara dengan satu resep bakmi turun-temurun.' },
+  { year: '2026', title: 'Berkembang',      desc: 'Pindah ke lokasi lebih besar, menu bertambah, pelanggan setia terus bertumbuh.' },
+  { year: '2026', title: 'Dikenal Luas',    desc: 'Masuk daftar rekomendasi kuliner Jakarta, ribuan ulasan bintang lima.' },
+  { year: '2026', title: 'Kini & Selamanya', desc: 'Tetap setia pada resep asli, terus berinovasi untuk generasi berikutnya.' },
 ];
 
 /* ── Counter animation hook ── */
