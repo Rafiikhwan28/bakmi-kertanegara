@@ -24,6 +24,3 @@ yarn-error.log*
 
 # PSD files
 *.psd
-
-# Large asset folders (upload manually)
-src/assets/Foto/
