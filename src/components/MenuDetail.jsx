@@ -161,7 +161,7 @@ export default function MenuDetail({ item, onClose }) {
           style={{ background: 'white', maxHeight: '88vh' }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-accent-400 via-accent-600 to-violet-600 z-10" />
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-accent-400 via-accent-600 to-accent-700 z-10" />
 
           {/* Foto kiri — klik untuk fullscreen */}
           <div

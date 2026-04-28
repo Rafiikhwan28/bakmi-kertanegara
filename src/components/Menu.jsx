@@ -153,7 +153,7 @@ const items = [
     ],
   },
   {
-    id: 12, name: 'Paket Keluarga', cat: 'Paket', price: '115.000',
+    id: 12, name: 'Paket Keluarga', cat: 'Paket', price: '100.000',
     desc: '3 Bakmi pilihan + 6 Pangsit + 3 Es Teh Manis — ciptakan memory bersama keluarga!',
     longDesc: '1 Bakmi Ayam + 1 Bakmi Ayam Jamur + 1 Bakmi Ayam Lada Hitam + 6 Pangsit Goreng/rebus + 3 Esteh Manis. Bersama keluarga ciptakan memory yang tak terlupakan.',
     img: f141, badge: 'Best Seller', discount: null,

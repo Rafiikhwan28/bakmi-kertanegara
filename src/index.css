@@ -14,7 +14,7 @@ body {
 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #f8fafc; }
-::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 99px; }
+::-webkit-scrollbar-thumb { background: #8f0b47; border-radius: 99px; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }

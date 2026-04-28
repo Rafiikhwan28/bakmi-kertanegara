@@ -53,7 +53,7 @@ export default function Hero() {
               fontSize: 'clamp(4rem, 10vw, 8rem)',
               letterSpacing: '-0.02em',
               lineHeight: 1.0,
-              color: '#c084fc',
+              color: '#d4347a',
               textShadow: '0 2px 20px rgba(0,0,0,0.4)',
             }}>
             Kertanegara

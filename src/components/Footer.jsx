@@ -16,7 +16,7 @@ const contacts = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-br from-accent-50 via-white to-purple-50 overflow-hidden border-t border-accent-100">
+    <footer className="relative bg-gradient-to-br from-accent-50 via-white to-accent-50 overflow-hidden border-t border-accent-100">
 
       {/* Decorative top accent */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent-400/60 to-transparent" />

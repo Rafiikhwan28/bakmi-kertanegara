@@ -112,7 +112,7 @@ export default function Navbar() {
                     borderRadius: scrolled ? '999px' : '6px',
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.color = scrolled ? '#9333ea' : '#ffffff';
+                    e.currentTarget.style.color = scrolled ? '#8f0b47' : '#ffffff';
                     if (scrolled) e.currentTarget.style.background = 'rgba(168,85,247,0.07)';
                   }}
                   onMouseLeave={e => {
@@ -176,7 +176,7 @@ export default function Navbar() {
                     borderRadius: scrolled ? '999px' : '6px',
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.color = scrolled ? '#9333ea' : '#ffffff';
+                    e.currentTarget.style.color = scrolled ? '#8f0b47' : '#ffffff';
                     if (scrolled) e.currentTarget.style.background = 'rgba(168,85,247,0.07)';
                   }}
                   onMouseLeave={e => {

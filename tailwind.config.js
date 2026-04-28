@@ -5,16 +5,16 @@ module.exports = {
     extend: {
       colors: {
         accent: {
-          50:  '#faf5ff',
-          100: '#f3e8ff',
-          200: '#e9d5ff',
-          300: '#d8b4fe',
-          400: '#c084fc',
-          500: '#a855f7',
-          600: '#9333ea',
-          700: '#7c3aed',
-          800: '#6b21a8',
-          900: '#581c87',
+          50:  '#fdf2f7',
+          100: '#fce7f0',
+          200: '#fad0e3',
+          300: '#f6a8c8',
+          400: '#ef6fa3',
+          500: '#d4347a',
+          600: '#8f0b47',   // ← warna utama #8f0b47
+          700: '#7a0a3d',
+          800: '#650832',
+          900: '#500628',
         },
       },
       fontFamily: {
@@ -22,9 +22,9 @@ module.exports = {
         display: ['"DM Serif Display"', 'serif'],
       },
       boxShadow: {
-        'soft':  '0 2px 20px rgba(147,51,234,0.08)',
-        'card':  '0 4px 32px rgba(147,51,234,0.12)',
-        'glow':  '0 8px 40px rgba(147,51,234,0.25)',
+        'soft':  '0 2px 20px rgba(143,11,71,0.08)',
+        'card':  '0 4px 32px rgba(143,11,71,0.12)',
+        'glow':  '0 8px 40px rgba(143,11,71,0.25)',
       },
     },
   },
