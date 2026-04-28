@@ -1,18 +1,28 @@
 import React, { useState, useRef } from 'react';
-import p1 from '../assets/Foto/Fotoinn128.jpg';
-import p2 from '../assets/Foto/Fotoinn132.jpg';
-import p3 from '../assets/Foto/Fotoinn135.jpg';
-import p4 from '../assets/Foto/Fotoinn137.jpg';
-import p5 from '../assets/Foto/Fotoinn141.jpg';
-import p6 from '../assets/Foto/Fotoinn144.jpg';
+import p1    from '../assets/Foto/Fotoinn128.jpg';
+import p2    from '../assets/Foto/Fotoinn132.jpg';
+import p3    from '../assets/Foto/Fotoinn135.jpg';
+import p4    from '../assets/Foto/Fotoinn137.jpg';
+import p5    from '../assets/Foto/Fotoinn141.jpg';
+import p6    from '../assets/Foto/Fotoinn144.jpg';
+import p7    from '../assets/Foto/Fotoinn149.jpg';
+import p8    from '../assets/Foto/Fotoinn151.jpg';
+import p9    from '../assets/Foto/Fotoinn156.jpg';
+import p10   from '../assets/Foto/Fotoinn157.jpg';
+import steak from '../assets/Foto/steakLadahitam.jpeg';
 
 const photos = [
-  { src:p1, label:'Bakmi Ayam Original', tag:'Best Seller', span:'lg:col-span-2 lg:row-span-2' },
-  { src:p2, label:'Bakmi Ayam Spesial',  tag:'Spesial',     span:'lg:col-span-1 lg:row-span-1' },
-  { src:p3, label:'Bakmi Kuah Baso',     tag:'Favorit',     span:'lg:col-span-1 lg:row-span-1' },
-  { src:p4, label:'Bakmi Goreng',        tag:'Wok Hei',     span:'lg:col-span-1 lg:row-span-2' },
-  { src:p5, label:'Pangsit Goreng',      tag:'Renyah',      span:'lg:col-span-1 lg:row-span-1' },
-  { src:p6, label:'Bakmi Komplit',       tag:'Premium',     span:'lg:col-span-1 lg:row-span-1' },
+  { src: p1,    label: 'Bakmi Ayam Kertanegara',     tag: 'Best Seller', span: 'lg:col-span-2 lg:row-span-2' },
+  { src: steak, label: 'Bakmi Steak Lada Hitam',     tag: 'Favorit',     span: 'lg:col-span-1 lg:row-span-1' },
+  { src: p2,    label: 'Bakmi Ayam Jamur',           tag: 'Best Seller', span: 'lg:col-span-1 lg:row-span-1' },
+  { src: p3,    label: 'Bakmi Ayam Lada Hitam',      tag: 'Menu Utama',  span: 'lg:col-span-1 lg:row-span-2' },
+  { src: p4,    label: 'Bakmi Ayam Steak Lada Hitam',tag: 'Best Seller', span: 'lg:col-span-1 lg:row-span-1' },
+  { src: p5,    label: 'Pangsit Goreng / Rebus',     tag: 'Side Dish',   span: 'lg:col-span-1 lg:row-span-1' },
+  { src: p6,    label: 'Paket Bakmi Ayam',           tag: 'Paket',       span: 'lg:col-span-1 lg:row-span-1' },
+  { src: p7,    label: 'Paket Bakmi Ayam Jamur',     tag: 'Paket',       span: 'lg:col-span-1 lg:row-span-1' },
+  { src: p8,    label: 'Paket Bakmi Lada Hitam',     tag: 'Paket',       span: 'lg:col-span-1 lg:row-span-1' },
+  { src: p9,    label: 'Paket Romantis Berdua',      tag: 'Best Seller', span: 'lg:col-span-1 lg:row-span-1' },
+  { src: p10,   label: 'Paket Keluarga',             tag: 'Paket',       span: 'lg:col-span-1 lg:row-span-1' },
 ];
 
 function TiltCard({ children, className, onClick }) {

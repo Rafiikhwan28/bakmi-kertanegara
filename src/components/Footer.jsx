@@ -36,7 +36,7 @@ export default function Footer() {
               Cita rasa autentik bakmi yang menghangatkan hati, dibuat dengan bahan segar dan resep turun-temurun sejak generasi pertama.
             </p>
             {/* WhatsApp CTA */}
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noreferrer"
+            <a href="https://wa.me/628211046212" target="_blank" rel="noreferrer"
               className="inline-flex items-center gap-2.5 bg-green-500/10 hover:bg-green-500/20 border border-green-500/30 hover:border-green-500/60 text-green-400 text-xs font-semibold px-5 py-2.5 rounded-full transition-all">
               <span className="text-base">💬</span>
               Chat via WhatsApp

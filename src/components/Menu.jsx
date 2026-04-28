@@ -9,129 +9,159 @@ import f149 from '../assets/Foto/Fotoinn149.jpg';
 import f151 from '../assets/Foto/Fotoinn151.jpg';
 import f156 from '../assets/Foto/Fotoinn156.jpg';
 import f157 from '../assets/Foto/Fotoinn157.jpg';
+import f158 from '../assets/Foto/steakLadahitam.jpeg'
 import MenuDetail from './MenuDetail';
 
-const categories = ['Semua', 'Paket', 'Topping', 'Promo'];
+const categories = ['Semua', 'Menu Utama', 'Paket', 'Side Dish'];
 
 const items = [
+  /* ── MENU UTAMA ── */
   {
-    id: 1, name: 'Paket Bakmi Ayam', cat: 'Paket', price: '0.000',
-    desc: 'Bakmi ayam dengan kuah kaldu bening, mie segar, dan topping pilihan',
-    longDesc: 'Paket lengkap bakmi ayam dengan mie segar buatan sendiri, kuah kaldu bening yang dimasak 6 jam, ayam cincang berbumbu, jamur, dan taburan bawang goreng.',
+    id: 1, name: 'Bakmi Ayam Kertanegara', cat: 'Menu Utama', price: '23.000',
+    desc: 'Gurih, lembut, nyaman di lidah — dijamin tidak bikin kembung!',
+    longDesc: 'Bakmi ayam Kertanegara yang gurih, lembut, nyaman di lidah, dan super ringan bahkan perutmu tetap happy, dijamin tidak menyebabkan kembung! Sekali coba, langsung ketagihan!',
     img: f128, badge: 'Best Seller', discount: null,
     features: [
-      { icon: '🍜', label: 'Mie Segar',    desc: 'Dibuat fresh setiap hari tanpa pengawet' },
-      { icon: '🍗', label: 'Ayam Pilihan', desc: 'Ayam kampung segar, dipotong harian' },
-      { icon: '🫙', label: 'Kaldu 6 Jam',  desc: 'Dimasak perlahan untuk rasa yang dalam' },
-      { icon: '🌿', label: 'Tanpa MSG',    desc: 'Bumbu alami, sehat untuk keluarga' },
+      { icon: '🍜', label: 'Home-made Mie',   desc: 'Mie dibuat sendiri setiap hari' },
+      { icon: '🍗', label: 'Ayam Pilihan',    desc: 'Ayam segar berkualitas tinggi' },
+      { icon: '🫙', label: 'Kaldu 6 Jam',     desc: 'Dimasak perlahan untuk rasa yang dalam' },
+      { icon: '🌿', label: 'Tanpa Pengawet',  desc: 'Bahan alami, sehat untuk keluarga' },
     ],
   },
   {
-    id: 2, name: 'Paket Bakmi Spesial', cat: 'Paket', price: '0.000',
-    desc: 'Bakmi spesial dengan ayam panggang, pangsit, dan kuah sapi pekat',
-    longDesc: 'Paket spesial dengan ayam panggang berbumbu kecap, pangsit goreng renyah, dan kuah kaldu sapi pekat yang kaya rasa. Pilihan sempurna untuk makan siang.',
-    img: f132, badge: 'Spesial', discount: null,
+    id: 2, name: 'Bakmi Ayam Jamur', cat: 'Menu Utama', price: '26.000',
+    desc: 'Gurihnya ayam bertemu manisnya jamur — perpaduan rasa khas Indonesia!',
+    longDesc: 'Gurihnya ayam bertemu manisnya jamur, perpaduan rasa khas Indonesia yang bikin nagih! Setiap suapan seperti pelukan hangat dari kampung halaman. Nikmat mana yang kau dustakan!',
+    img: f132, badge: 'Best Seller', discount: null,
     features: [
-      { icon: '🔥', label: 'Ayam Panggang',  desc: 'Dipanggang dengan bumbu kecap spesial' },
-      { icon: '🥟', label: 'Pangsit Goreng', desc: 'Renyah di luar, juicy di dalam' },
-      { icon: '🐄', label: 'Kaldu Sapi',     desc: 'Kuah pekat dari tulang sapi pilihan' },
-      { icon: '⭐', label: 'Menu Spesial',   desc: 'Rekomendasi chef untuk pengalaman terbaik' },
+      { icon: '🍜', label: 'Home-made Mie',   desc: 'Mie dibuat sendiri setiap hari' },
+      { icon: '🍄', label: 'Jamur Pilihan',   desc: 'Jamur segar berkualitas tinggi' },
+      { icon: '🫙', label: 'Kaldu 6 Jam',     desc: 'Dimasak perlahan untuk rasa yang dalam' },
+      { icon: '🌿', label: 'Tanpa Pengawet',  desc: 'Bahan alami, sehat untuk keluarga' },
     ],
   },
   {
-    id: 3, name: 'Paket Bakmi Komplit', cat: 'Paket', price: '0.000',
-    desc: 'Ayam, baso, pangsit, chasiu — semua dalam satu mangkuk',
-    longDesc: 'Satu mangkuk berisi semua yang terbaik: mie segar, ayam panggang, baso sapi, pangsit goreng, dan chasiu. Pengalaman bakmi paling lengkap.',
-    img: f135, badge: 'Premium', discount: null,
+    id: 3, name: 'Bakmi Ayam Lada Hitam', cat: 'Menu Utama', price: '33.000',
+    desc: 'Gurihnya ayam bertemu saus lada hitam — perpaduan rasa yang epic!',
+    longDesc: 'Gurihnya ayam bertemu Saus Lada Hitam perpaduan rasa yang epic yang bikin gairah makan bertambah! Rasakan sendiri kelezatannya!',
+    img: f135, badge: null, discount: null,
     features: [
-      { icon: '👑', label: 'All-in-One',   desc: 'Ayam, baso, pangsit, chasiu dalam satu mangkuk' },
-      { icon: '🏆', label: 'Menu Premium', desc: 'Pilihan terbaik untuk pengalaman lengkap' },
-      { icon: '🍜', label: 'Porsi Besar',  desc: 'Porsi jumbo yang mengenyangkan' },
-      { icon: '✨', label: 'Chef Special', desc: 'Rekomendasi utama dari dapur kami' },
+      { icon: '🍜', label: 'Home-made Mie',    desc: 'Mie dibuat sendiri setiap hari' },
+      { icon: '🌶️', label: 'Lada Hitam',       desc: 'Saus lada hitam pilihan yang kaya rasa' },
+      { icon: '🫙', label: 'Kaldu 6 Jam',      desc: 'Dimasak perlahan untuk rasa yang dalam' },
+      { icon: '🌿', label: 'Tanpa Pengawet',   desc: 'Bahan alami, sehat untuk keluarga' },
     ],
   },
   {
-    id: 4, name: 'Paket Bakmi Goreng', cat: 'Paket', price: '0.000',
-    desc: 'Bakmi goreng dengan bumbu rahasia dan telur mata sapi',
-    longDesc: 'Mie goreng dengan bumbu rahasia turun-temurun, dimasak di atas wok panas dengan aroma smoky yang khas. Disajikan dengan telur mata sapi dan acar timun.',
-    img: f137, badge: 'Favorit', discount: null,
+    id: 4, name: 'Bakmi Ayam Steak Lada Hitam', cat: 'Menu Utama', price: '37.000',
+    desc: 'Ayam steak lada hitam di atas iron plate panas — satu gigitan langsung berasa mewah!',
+    longDesc: 'Home-made mie + bumbu rahasia turun-temurun + ayam steak lada hitam yang menggoda mata dan lidah! Disajikan di atas iron plate yang panas. Satu gigitan, langsung berasa mewah. Ini bakmi yang bikin kamu bilang "Wah, enak banget!"',
+    img: f158, badge: 'Best Seller', discount: null,
     features: [
-      { icon: '🔥', label: 'Wok Hei',        desc: 'Dimasak di wok panas untuk aroma smoky' },
-      { icon: '🥚', label: 'Telur Mata Sapi', desc: 'Telur kampung segar di atas mie' },
-      { icon: '🌶️', label: 'Bumbu Rahasia',  desc: 'Resep turun-temurun sejak generasi pertama' },
-      { icon: '🥒', label: 'Acar Segar',     desc: 'Pelengkap acar timun dan cabai rawit' },
+      { icon: '🥩', label: 'Ayam Steak',      desc: 'Ayam steak lada hitam yang menggoda' },
+      { icon: '🔥', label: 'Iron Plate',       desc: 'Disajikan di atas iron plate panas' },
+      { icon: '🫙', label: 'Bumbu Rahasia',    desc: 'Resep turun-temurun khas Kertanegara' },
+      { icon: '🌿', label: 'Tanpa Pengawet',   desc: 'Bahan alami, sehat untuk keluarga' },
+    ],
+  },
+
+  /* ── SIDE DISH ── */
+  {
+    id: 5, name: 'Pangsit Goreng / Rebus', cat: 'Side Dish', price: '5.000/pcs',
+    desc: 'Pas digigit renyahnya bikin nagih — pangsit terbaik dengan isian ayam pilihan!',
+    longDesc: 'Pas digigit renyahnya bikin nagih. Kulit pangsit home-made dengan isian ayam pilihan berkualitas. Tanpa bahan pengawet. Ini adalah pangsit terbaik!',
+    img: f137, badge: null, discount: null,
+    features: [
+      { icon: '🥟', label: 'Home-made Kulit', desc: 'Kulit pangsit dibuat sendiri' },
+      { icon: '🍗', label: 'Isian Ayam',      desc: 'Isian ayam dengan bahan pilihan' },
+      { icon: '🔥', label: 'Paling Renyah',   desc: 'Tekstur renyah sempurna' },
+      { icon: '🌿', label: 'Tanpa Pengawet',  desc: 'Bahan alami tanpa pengawet' },
+    ],
+  },
+
+  /* ── PAKET ── */
+  {
+    id: 6, name: 'Paket Bakmi Ayam Kertanegara', cat: 'Paket', price: '35.000',
+    desc: 'Bakmi Ayam + 2 Pangsit + Es Teh Manis — cocok untuk hidup lebih lengkap!',
+    longDesc: 'Paket Bakmi Ayam + 2 Pangsit Goreng/rebus + Esteh Manis cocok untuk kamu yang pengen hidup lebih lengkap. Bakmi ini kamu banget!',
+    img: f151, badge: 'Paket', discount: null,
+    features: [
+      { icon: '🍜', label: 'Bakmi Ayam',      desc: '1 porsi Bakmi Ayam Kertanegara' },
+      { icon: '🥟', label: '2 Pangsit',       desc: 'Goreng atau rebus sesuai selera' },
+      { icon: '🧋', label: 'Es Teh Manis',    desc: 'Minuman segar pelengkap' },
+      { icon: '💰', label: 'Lebih Hemat',     desc: 'Harga paket lebih ekonomis' },
     ],
   },
   {
-    id: 5, name: 'Topping Baso Sapi', cat: 'Topping', price: '0.000',
-    desc: 'Baso sapi kenyal buatan sendiri, cocok untuk semua menu',
-    longDesc: 'Baso sapi kenyal buatan sendiri dari daging sapi segar pilihan. Bisa ditambahkan ke menu bakmi manapun untuk menambah cita rasa.',
-    img: f141, badge: null, discount: null,
+    id: 7, name: 'Paket Bakmi Ayam Jamur', cat: 'Paket', price: '38.000',
+    desc: 'Bakmi Ayam Jamur + 2 Pangsit + Es Teh Manis — definisi nikmat yang sebenarnya!',
+    longDesc: '1 Porsi Bakmi Ayam Jamur + 2 Pangsit Goreng/rebus + Esteh Manis. Gurihnya ayam bertemu manisnya jamur, perpaduan rasa khas Indonesia yang bikin nagih! Ini definisi nikmat yang sebenarnya!',
+    img: f149, badge: 'Paket', discount: null,
     features: [
-      { icon: '🥩', label: 'Daging Sapi',   desc: 'Dibuat dari daging sapi segar pilihan' },
-      { icon: '🫙', label: 'Tanpa Pengawet', desc: 'Dibuat fresh setiap hari' },
-      { icon: '🍜', label: 'Cocok Semua',   desc: 'Bisa ditambah ke menu apapun' },
-      { icon: '💪', label: 'Kenyal Alami',  desc: 'Tekstur kenyal tanpa bahan kimia' },
+      { icon: '🍜', label: 'Bakmi Ayam Jamur', desc: '1 porsi Bakmi Ayam Jamur' },
+      { icon: '🥟', label: '2 Pangsit',        desc: 'Goreng atau rebus sesuai selera' },
+      { icon: '🧋', label: 'Es Teh Manis',     desc: 'Minuman segar pelengkap' },
+      { icon: '💰', label: 'Lebih Hemat',      desc: 'Harga paket lebih ekonomis' },
     ],
   },
   {
-    id: 6, name: 'Topping Pangsit Goreng', cat: 'Topping', price: '0.000',
-    desc: 'Pangsit goreng renyah isi ayam dan udang segar',
-    longDesc: 'Pangsit dengan kulit tipis renyah, isi campuran ayam dan udang segar berbumbu. Disajikan dengan saus cocol spesial kecap-cabai.',
-    img: f144, badge: null, discount: null,
+    id: 8, name: 'Paket Bakmi Ayam Lada Hitam', cat: 'Paket', price: '45.000',
+    desc: 'Bakmi Lada Hitam + 2 Pangsit + Es Teh Manis — rasa epic dalam satu paket!',
+    longDesc: '1 Bakmi Lada Hitam + 2 Pangsit Goreng + Esteh Manis. Gurihnya ayam bertemu Saus Lada Hitam perpaduan rasa yang epic yang bikin gairah makan bertambah! Rasakan sendiri kelezatannya!',
+    img: f144, badge: 'Paket', discount: null,
     features: [
-      { icon: '🦐', label: 'Ayam & Udang', desc: 'Isian segar campuran ayam dan udang' },
-      { icon: '🥠', label: 'Kulit Tipis',  desc: 'Renyah sempurna, tidak berminyak' },
-      { icon: '🫙', label: 'Saus Spesial', desc: 'Saus cocol kecap-cabai buatan sendiri' },
-      { icon: '🍽️', label: 'Pelengkap',   desc: 'Cocok dipadukan dengan semua menu bakmi' },
+      { icon: '🍜', label: 'Bakmi Lada Hitam', desc: '1 porsi Bakmi Ayam Lada Hitam' },
+      { icon: '🥟', label: '2 Pangsit',        desc: 'Goreng atau rebus sesuai selera' },
+      { icon: '🧋', label: 'Es Teh Manis',     desc: 'Minuman segar pelengkap' },
+      { icon: '💰', label: 'Lebih Hemat',      desc: 'Harga paket lebih ekonomis' },
     ],
   },
   {
-    id: 7, name: 'Topping Chasiu', cat: 'Topping', price: '0.000',
-    desc: 'Chasiu daging babi/ayam panggang berbumbu manis gurih',
-    longDesc: 'Chasiu panggang dengan bumbu kecap manis, bawang putih, dan rempah pilihan. Tekstur lembut dengan lapisan karamel yang menggugah selera.',
-    img: f149, badge: null, discount: null,
+    id: 9, name: 'Paket Bakmi Steak Lada Hitam', cat: 'Paket', price: '47.000',
+    desc: 'Bakmi Steak Lada Hitam + 2 Pangsit + Es Teh Manis — mewah dalam satu paket!',
+    longDesc: '1 Bakmi Steak Lada Hitam + 2 Pangsit Goreng + Esteh Manis. Home-made mie + bumbu rahasia turun-temurun + ayam steak lada hitam yang menggoda mata dan lidah! Disajikan di atas iron plate panas.',
+    img: f158, badge: 'Menu Favorite', discount: null,
     features: [
-      { icon: '🔥', label: 'Dipanggang',    desc: 'Dipanggang dengan arang untuk aroma khas' },
-      { icon: '🍯', label: 'Bumbu Manis',   desc: 'Kecap manis dan rempah pilihan' },
-      { icon: '✂️', label: 'Iris Tipis',    desc: 'Diiris tipis untuk sajian yang cantik' },
-      { icon: '⭐', label: 'Favorit Tamu',  desc: 'Topping paling banyak dipesan' },
+      { icon: '🥩', label: 'Bakmi Steak',     desc: '1 porsi Bakmi Ayam Steak Lada Hitam' },
+      { icon: '🥟', label: '2 Pangsit',       desc: 'Goreng atau rebus sesuai selera' },
+      { icon: '🧋', label: 'Es Teh Manis',    desc: 'Minuman segar pelengkap' },
+      { icon: '💰', label: 'Lebih Hemat',     desc: 'Harga paket lebih ekonomis' },
     ],
   },
   {
-    id: 8, name: 'Promo Paket Duo', cat: 'Promo', price: '0.000',
-    desc: '2 porsi bakmi ayam original dengan harga spesial',
-    longDesc: 'Promo hemat untuk berdua! Dapatkan 2 porsi bakmi ayam original dengan kuah kaldu bening, mie segar, dan topping lengkap dengan harga spesial.',
-    img: f151, badge: 'Promo', discount: 15,
+    id: 10, name: 'Paket Romantis Bakmi Berdua', cat: 'Paket', price: '70.000',
+    desc: '2 Paket Bakmi Ayam + 4 Pangsit + 2 Es Teh Manis — berdua lebih hemat!',
+    longDesc: '2 Paket Bakmi Ayam + 4 Pangsit Goreng/rebus + 2 Esteh Manis cocok untuk kamu yang pengen hidup lebih lengkap. Berdua lebih hemat!',
+    img: f156, badge: 'Best Seller', discount: null,
     features: [
-      { icon: '�', label: 'Untuk 2 Orang', desc: '2 porsi penuh dalam satu paket hemat' },
-      { icon: '💰', label: 'Hemat 15%',     desc: 'Lebih hemat dibanding beli satuan' },
-      { icon: '🍜', label: 'Mie Segar',     desc: 'Mie segar buatan sendiri setiap hari' },
-      { icon: '🎉', label: 'Terbatas',      desc: 'Promo berlaku selama persediaan ada' },
+      { icon: '👫', label: 'Untuk 2 Orang',   desc: '2 porsi Bakmi Ayam lengkap' },
+      { icon: '🥟', label: '4 Pangsit',       desc: 'Goreng atau rebus sesuai selera' },
+      { icon: '🧋', label: '2 Es Teh Manis',  desc: '2 minuman segar pelengkap' },
+      { icon: '💰', label: 'Berdua Hemat',    desc: 'Lebih hemat dibanding beli satuan' },
     ],
   },
   {
-    id: 9, name: 'Promo Paket Keluarga', cat: 'Promo', price: '0.000',
-    desc: '4 porsi bakmi pilihan dengan minuman gratis',
-    longDesc: 'Paket keluarga terlengkap! 4 porsi bakmi pilihan (bisa mix menu) ditambah 4 minuman es teh gratis. Cocok untuk makan bersama keluarga.',
-    img: f156, badge: 'Promo', discount: 20,
+    id: 11, name: 'Paket Sahabat Berdua', cat: 'Paket', price: '75.000',
+    desc: '2 Paket Bakmi Jamur + 4 Pangsit + 2 Es Teh Manis — berdua lebih hemat!',
+    longDesc: '2 Paket Bakmi Jamur + 4 Pangsit Goreng/rebus + 2 Esteh Manis cocok untuk kamu yang mengerti pentingnya persahabatan. Berdua lebih hemat!',
+    img: f156, badge: 'Best Seller', discount: null,
     features: [
-      { icon: '👨‍👩‍👧‍👦', label: 'Untuk 4 Orang', desc: '4 porsi bakmi pilihan bebas mix menu' },
-      { icon: '🥤', label: 'Minuman Gratis', desc: '4 es teh manis gratis untuk keluarga' },
-      { icon: '💰', label: 'Hemat 20%',      desc: 'Penghematan terbesar untuk keluarga' },
-      { icon: '�', label: 'Mix Menu',       desc: 'Bebas pilih menu berbeda tiap porsi' },
+      { icon: '👫', label: 'Untuk 2 Orang',   desc: '2 porsi Bakmi Ayam Jamur lengkap' },
+      { icon: '🥟', label: '4 Pangsit',       desc: 'Goreng atau rebus sesuai selera' },
+      { icon: '🧋', label: '2 Es Teh Manis',  desc: '2 minuman segar pelengkap' },
+      { icon: '💰', label: 'Berdua Hemat',    desc: 'Lebih hemat dibanding beli satuan' },
     ],
   },
   {
-    id: 10, name: 'Promo Happy Hour', cat: 'Promo', price: '0.000',
-    desc: 'Bakmi ayam original harga spesial jam 14.00–17.00',
-    longDesc: 'Nikmati bakmi ayam original dengan harga spesial setiap hari pukul 14.00–17.00 WIB. Promo happy hour untuk menemani sore hari Anda.',
-    img: f157, badge: 'Promo', discount: 20,
+    id: 12, name: 'Paket Keluarga', cat: 'Paket', price: '115.000',
+    desc: '3 Bakmi pilihan + 6 Pangsit + 3 Es Teh Manis — ciptakan memory bersama keluarga!',
+    longDesc: '1 Bakmi Ayam + 1 Bakmi Ayam Jamur + 1 Bakmi Ayam Lada Hitam + 6 Pangsit Goreng/rebus + 3 Esteh Manis. Bersama keluarga ciptakan memory yang tak terlupakan.',
+    img: f141, badge: 'Best Seller', discount: null,
     features: [
-      { icon: '⏰', label: 'Happy Hour',    desc: 'Berlaku setiap hari 14.00–17.00 WIB' },
-      { icon: '💰', label: 'Hemat 20%',     desc: 'Harga spesial di jam tertentu' },
-      { icon: '🍜', label: 'Menu Pilihan',  desc: 'Bakmi ayam original porsi penuh' },
-      { icon: '📅', label: 'Setiap Hari',   desc: 'Berlaku setiap hari tanpa terkecuali' },
+      { icon: '👨‍👩‍👧‍👦', label: 'Untuk 3 Orang',  desc: '3 porsi bakmi pilihan berbeda' },
+      { icon: '🥟', label: '6 Pangsit',       desc: 'Goreng atau rebus sesuai selera' },
+      { icon: '🧋', label: '3 Es Teh Manis',  desc: '3 minuman segar pelengkap' },
+      { icon: '💰', label: 'Paling Hemat',    desc: 'Paket terlengkap untuk keluarga' },
     ],
   },
 ];
@@ -174,17 +204,14 @@ export default function Menu() {
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => setSelected(item)}
-                className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-soft hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col"
-              >
+              <div key={item.id} onClick={() => setSelected(item)}
+                className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-soft hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col">
+
                 {/* Photo */}
                 <div className="relative overflow-hidden" style={{ height: '220px' }}>
                   <img src={item.img} alt={item.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-
                   {item.badge && (
                     <span className="absolute top-3 left-3 bg-accent-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full tracking-wider uppercase shadow-glow">
                       {item.badge}
@@ -196,7 +223,6 @@ export default function Menu() {
                       <span className="text-white text-[8px] font-bold leading-none">OFF</span>
                     </div>
                   )}
-
                   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur text-accent-600 text-[10px] font-bold px-4 py-1.5 rounded-full shadow transition-all duration-300 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 whitespace-nowrap">
                     Lihat Detail →
                   </div>
@@ -205,9 +231,7 @@ export default function Menu() {
                 {/* Info */}
                 <div className="flex flex-col flex-1 p-5">
                   <div className="mb-2">
-                    <span className="text-accent-500 text-[10px] font-semibold tracking-widest uppercase">
-                      {item.cat}
-                    </span>
+                    <span className="text-accent-500 text-[10px] font-semibold tracking-widest uppercase">{item.cat}</span>
                   </div>
                   <h3 className="font-display text-slate-900 font-bold text-lg leading-snug mb-2 group-hover:text-accent-700 transition-colors duration-200">
                     {item.name}

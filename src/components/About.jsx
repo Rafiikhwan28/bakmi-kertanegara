@@ -29,7 +29,7 @@ export default function About() {
 
       {/* ── Hero band ── */}
       <div className="relative h-[45vh] md:h-[55vh] overflow-hidden">
-        <img src={p6} alt="about hero" className="w-full h-full object-cover scale-105" />
+        <img src={p2} alt="about hero" className="w-full h-full object-cover scale-105" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/10 to-white" />
         <div className="absolute inset-0 bg-gradient-to-r from-white/40 to-transparent" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">

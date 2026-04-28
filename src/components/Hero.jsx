@@ -38,7 +38,7 @@ export default function Hero() {
         <div className="flex items-center gap-3 mb-5" style={reveal(0)}>
           <div className="h-px w-10 bg-white/60" />
           <span className="text-white text-[10px] font-bold tracking-[0.5em] uppercase">
-            Since 2009 · Jakarta
+            Since 2026 · Depok
           </span>
           <div className="h-px w-10 bg-white/60" />
         </div>
@@ -72,7 +72,7 @@ export default function Hero() {
         {/* Description */}
         <p className="text-white/85 text-sm md:text-base leading-relaxed mb-8 max-w-sm font-light"
           style={reveal(250)}>
-          Mie segar dengan kuah kaldu dimasak 6 jam, dari resep turun-temurun sejak generasi pertama.
+          "Kadang, kebahagiaan itu sesederhana duduk tenang dan menikmati semangkuk bakmie hangat."
         </p>
 
         {/* CTA */}
