@@ -83,7 +83,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="tentang" ref={sectionRef} className="bg-white overflow-hidden">
+    <section id="tentang" ref={sectionRef} className="bg-white overflow-hidden" style={{ scrollMarginTop: '64px' }}>
 
       {/* ── HERO BAND ── */}
       <div className="relative h-[35vh] md:h-[55vh] overflow-hidden">

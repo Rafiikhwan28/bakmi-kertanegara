@@ -189,7 +189,7 @@ export default function Menu() {
 
   return (
     <>
-      <section id="menu" className="py-14 md:py-24 bg-white">
+      <section id="menu" className="py-14 md:py-24 bg-white" style={{ scrollMarginTop: '64px' }}>
         <div className="max-w-7xl mx-auto px-4 md:px-6">
 
           {/* Header */}

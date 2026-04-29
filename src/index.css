@@ -77,3 +77,8 @@ body {
 /* Hide scrollbar for horizontal scroll */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Prevent sections from being hidden under fixed navbar */
+section[id], div[id] {
+  scroll-margin-top: 64px;
+}

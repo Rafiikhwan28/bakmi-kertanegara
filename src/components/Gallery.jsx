@@ -55,15 +55,16 @@ function MobileCarousel({ photos, onOpen }) {
   const onTouchMove = (e) => {
     const dx = Math.abs(e.touches[0].clientX - startX.current);
     const dy = Math.abs(e.touches[0].clientY - startY.current);
-    if (dx > dy && dx > 8) isDrag.current = true;
+    if (dx > dy && dx > 10) isDrag.current = true;
   };
   const onTouchEnd = (e) => {
     const dx = e.changedTouches[0].clientX - startX.current;
-    if (isDrag.current && Math.abs(dx) > 40) {
-      dx < 0 ? next() : prev();
-    } else if (!isDrag.current) {
-      onOpen(active);
+    if (isDrag.current && Math.abs(dx) > 45) {
+      // Geser kanan = foto sebelumnya (prev), geser kiri = foto berikutnya (next)
+      dx > 0 ? prev() : next();
     }
+    // Tap (buka lightbox) hanya jika TIDAK ada drag sama sekali
+    // isDrag tetap false = jari tidak bergerak horizontal
   };
 
   const indices = [
@@ -94,19 +95,20 @@ function MobileCarousel({ photos, onOpen }) {
             <div
               key={`${idx}-${pos}`}
               className="relative rounded-2xl overflow-hidden shrink-0"
+              onClick={() => { if (isActive && !isDrag.current) onOpen(idx); }}
               style={{
-                width:    isActive ? '72vw' : '18vw',
-                maxWidth: isActive ? '300px' : '72px',
-                height:   isActive ? '220px' : '130px',
-                opacity:  anim && isActive ? 0 : isActive ? 1 : 0.45,
-                filter:   isActive ? 'none' : 'blur(2.5px)',
+                width:    isActive ? '78vw' : '24vw',
+                maxWidth: isActive ? '320px' : '96px',
+                height:   isActive ? '260px' : '160px',
+                opacity:  anim && isActive ? 0 : isActive ? 1 : 0.65,
+                filter:   isActive ? 'none' : 'blur(1px)',
                 transform: isActive
                   ? `scale(1) translateX(${slideX})`
-                  : 'scale(0.9)',
+                  : 'scale(0.93)',
                 transition: anim && isActive
                   ? 'opacity 0.32s ease, transform 0.32s cubic-bezier(0.16,1,0.3,1)'
                   : 'all 0.45s cubic-bezier(0.16,1,0.3,1)',
-                boxShadow: isActive ? '0 16px 40px rgba(0,0,0,0.2)' : 'none',
+                boxShadow: isActive ? '0 20px 50px rgba(0,0,0,0.25)' : '0 4px 12px rgba(0,0,0,0.1)',
               }}
             >
               <img src={p.src} alt="" className="w-full h-full object-cover" />
@@ -230,7 +232,7 @@ export default function Gallery() {
   const [gridRef,   gridVisible]   = useReveal(0.05);
 
   return (
-    <section id="gallery" className="py-14 md:py-28 bg-gradient-to-b from-white to-accent-50 overflow-hidden">
+    <section id="gallery" className="py-14 md:py-28 bg-gradient-to-b from-white to-accent-50 overflow-hidden" style={{ scrollMarginTop: '64px' }}>
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div ref={headerRef} className={`flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16 reveal ${headerVisible ? 'visible' : ''}`}>
           <div>

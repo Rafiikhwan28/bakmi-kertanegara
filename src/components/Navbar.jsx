@@ -202,7 +202,7 @@ export default function Navbar() {
         <div
           className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto"
           style={{
-            top: scrolled || open ? '-100px' : '20px',
+            top: scrolled || open ? '-100px' : '48px',
             opacity: scrolled || open ? 0 : 1,
             transition: 'top 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease',
             zIndex: 60,
