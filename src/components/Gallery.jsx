@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import useReveal from '../hooks/useReveal';
 import p1    from '../assets/Foto/Fotoinn128.jpg';
 import p2    from '../assets/Foto/Fotoinn132.jpg';
@@ -26,94 +26,76 @@ const photos = [
   { src: p10,   label: 'Paket Keluarga',             tag: 'Paket',       span: 'lg:col-span-1 lg:row-span-1' },
 ];
 
-/* ── Infinite focus carousel untuk mobile ── */
+/* ── Focus carousel dengan native scroll ── */
 function MobileCarousel({ photos, onOpen }) {
-  const [active, setActive]   = useState(0);
-  const [dir,    setDir]      = useState(0); // -1 = prev, 1 = next
-  const [anim,   setAnim]     = useState(false);
-  const startX  = useRef(0);
-  const startY  = useRef(0);
-  const isDrag  = useRef(false);
+  const scrollRef  = useRef(null);
+  const lastTap    = useRef(0);
+  const lastTapIdx = useRef(-1);
+  const [activeIdx, setActiveIdx] = useState(0);
 
-  const go = useCallback((direction) => {
-    setDir(direction);
-    setAnim(true);
-    setTimeout(() => {
-      setActive(a => (a + direction + photos.length) % photos.length);
-      setAnim(false);
-    }, 320);
-  }, [photos.length]);
-
-  const prev = useCallback(() => go(-1), [go]);
-  const next = useCallback(() => go(1),  [go]);
-
-  const onTouchStart = (e) => {
-    startX.current = e.touches[0].clientX;
-    startY.current = e.touches[0].clientY;
-    isDrag.current = false;
+  /* Track foto aktif saat scroll */
+  const onScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardW = el.scrollWidth / photos.length;
+    const idx   = Math.round(el.scrollLeft / cardW);
+    setActiveIdx(Math.max(0, Math.min(idx, photos.length - 1)));
   };
-  const onTouchMove = (e) => {
-    const dx = Math.abs(e.touches[0].clientX - startX.current);
-    const dy = Math.abs(e.touches[0].clientY - startY.current);
-    if (dx > dy && dx > 10) isDrag.current = true;
-  };
-  const onTouchEnd = (e) => {
-    const dx = e.changedTouches[0].clientX - startX.current;
-    if (isDrag.current && Math.abs(dx) > 45) {
-      // Geser kanan = foto sebelumnya (prev), geser kiri = foto berikutnya (next)
-      dx > 0 ? prev() : next();
+
+  /* Double-tap untuk buka lightbox */
+  const handleTap = (idx) => {
+    const now = Date.now();
+    if (now - lastTap.current < 350 && lastTapIdx.current === idx) {
+      onOpen(idx);
+      lastTap.current = 0;
+    } else {
+      lastTap.current    = now;
+      lastTapIdx.current = idx;
     }
-    // Tap (buka lightbox) hanya jika TIDAK ada drag sama sekali
-    // isDrag tetap false = jari tidak bergerak horizontal
   };
-
-  const indices = [
-    (active - 1 + photos.length) % photos.length,
-    active,
-    (active + 1) % photos.length,
-  ];
 
   return (
-    <div
-      className="relative w-full overflow-hidden py-4 select-none"
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-    >
-      {/* Cards row */}
-      <div className="flex items-center justify-center gap-3 px-4">
-        {indices.map((idx, pos) => {
-          const isActive = pos === 1;
-          const p = photos[idx];
-
-          /* Slide direction: active card slides in from opposite of swipe */
-          const slideX = anim && isActive
-            ? dir > 0 ? '100%' : '-100%'   // entering from right or left
-            : '0%';
-
+    <div className="w-full">
+      <div
+        ref={scrollRef}
+        onScroll={onScroll}
+        className="flex overflow-x-auto scrollbar-hide py-4 items-center"
+        style={{
+          scrollSnapType: 'x mandatory',
+          WebkitOverflowScrolling: 'touch',
+          gap: '12px',
+          paddingLeft:  'calc(50% - 39vw)',
+          paddingRight: 'calc(50% - 39vw)',
+        }}
+      >
+        {photos.map((p, i) => {
+          const isActive = i === activeIdx;
           return (
             <div
-              key={`${idx}-${pos}`}
-              className="relative rounded-2xl overflow-hidden shrink-0"
-              onClick={() => { if (isActive && !isDrag.current) onOpen(idx); }}
+              key={i}
+              onTouchEnd={() => handleTap(i)}
+              className="relative rounded-2xl overflow-hidden shrink-0 cursor-pointer"
               style={{
-                width:    isActive ? '78vw' : '24vw',
-                maxWidth: isActive ? '320px' : '96px',
-                height:   isActive ? '260px' : '160px',
-                opacity:  anim && isActive ? 0 : isActive ? 1 : 0.65,
-                filter:   isActive ? 'none' : 'blur(1px)',
-                transform: isActive
-                  ? `scale(1) translateX(${slideX})`
-                  : 'scale(0.93)',
-                transition: anim && isActive
-                  ? 'opacity 0.32s ease, transform 0.32s cubic-bezier(0.16,1,0.3,1)'
-                  : 'all 0.45s cubic-bezier(0.16,1,0.3,1)',
-                boxShadow: isActive ? '0 20px 50px rgba(0,0,0,0.25)' : '0 4px 12px rgba(0,0,0,0.1)',
+                scrollSnapAlign: 'center',
+                width:     isActive ? '78vw' : '22vw',
+                maxWidth:  isActive ? '320px' : '88px',
+                height:    isActive ? '260px' : '170px',
+                opacity:   isActive ? 1 : 0.7,
+                transform: isActive ? 'scale(1)' : 'scale(0.94)',
+                transition: 'width 0.35s cubic-bezier(0.25,1,0.5,1), height 0.35s cubic-bezier(0.25,1,0.5,1), opacity 0.35s ease, transform 0.35s ease',
+                boxShadow: isActive
+                  ? '0 16px 40px rgba(0,0,0,0.22)'
+                  : '0 4px 12px rgba(0,0,0,0.08)',
               }}
             >
               <img src={p.src} alt="" className="w-full h-full object-cover" />
               {isActive && (
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/30 backdrop-blur-sm text-white text-[10px] px-3 py-1 rounded-full whitespace-nowrap opacity-70">
+                    2× tap untuk perbesar
+                  </div>
+                </>
               )}
             </div>
           );
@@ -121,14 +103,14 @@ function MobileCarousel({ photos, onOpen }) {
       </div>
 
       {/* Dot indicators */}
-      <div className="flex justify-center gap-1.5 mt-4">
+      <div className="flex justify-center gap-1.5 mt-2">
         {photos.map((_, i) => (
-          <button key={i} onClick={() => { const d = i > active ? 1 : -1; setActive(i); setDir(d); }}
-            className="transition-all duration-300 rounded-full"
+          <div key={i}
+            className="rounded-full transition-all duration-300"
             style={{
-              width:  i === active ? '20px' : '6px',
+              width:  i === activeIdx ? '20px' : '6px',
               height: '6px',
-              background: i === active ? '#8f0b47' : '#e2e8f0',
+              background: i === activeIdx ? '#8f0b47' : '#e2e8f0',
             }}
           />
         ))}
