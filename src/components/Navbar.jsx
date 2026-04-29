@@ -277,7 +277,7 @@ export default function Navbar() {
               <p className="text-slate-400 text-xs">Jam Buka</p>
               <p className="text-slate-700 text-sm font-medium mt-0.5">10.00 – 22.00 WIB</p>
             </div>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noreferrer"
+            <a href="https://wa.me/628211046212" target="_blank" rel="noreferrer"
               className="flex items-center gap-2 bg-accent-600 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-glow">
               <span>💬</span> WhatsApp
             </a>

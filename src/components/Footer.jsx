@@ -88,7 +88,7 @@ export default function Footer() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between text-slate-500">
                 <span>Senin – Jumat</span>
-                <span className="text-slate-700">00.00 – 00.00</span>
+                <span className="text-slate-700">10.00 – 22.00</span>
               </div>
               <div className="flex justify-between text-slate-500">
                 <span>Sabtu – Minggu</span>
