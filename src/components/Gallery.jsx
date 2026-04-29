@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import useReveal from '../hooks/useReveal';
 import p1    from '../assets/Foto/Fotoinn128.jpg';
 import p2    from '../assets/Foto/Fotoinn132.jpg';
@@ -33,13 +33,23 @@ function MobileCarousel({ photos, onOpen }) {
   const lastTapIdx = useRef(-1);
   const [activeIdx, setActiveIdx] = useState(0);
 
-  /* Track foto aktif saat scroll */
-  const onScroll = () => {
+  const CARD_W = 280; // lebar tetap semua card (px)
+  const GAP    = 12;
+
+  /* Hitung foto aktif berdasarkan scroll position */
+  const onScroll = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
-    const cardW = el.scrollWidth / photos.length;
-    const idx   = Math.round(el.scrollLeft / cardW);
+    const offset = el.scrollLeft;
+    const idx = Math.round(offset / (CARD_W + GAP));
     setActiveIdx(Math.max(0, Math.min(idx, photos.length - 1)));
+  }, [photos.length]);
+
+  /* Scroll ke foto tertentu */
+  const scrollTo = (idx) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({ left: idx * (CARD_W + GAP), behavior: 'smooth' });
   };
 
   /* Double-tap untuk buka lightbox */
@@ -56,6 +66,7 @@ function MobileCarousel({ photos, onOpen }) {
 
   return (
     <div className="w-full">
+      {/* Scroll container */}
       <div
         ref={scrollRef}
         onScroll={onScroll}
@@ -63,9 +74,10 @@ function MobileCarousel({ photos, onOpen }) {
         style={{
           scrollSnapType: 'x mandatory',
           WebkitOverflowScrolling: 'touch',
-          gap: '12px',
-          paddingLeft:  'calc(50% - 39vw)',
-          paddingRight: 'calc(50% - 39vw)',
+          gap: `${GAP}px`,
+          /* Padding agar card pertama & terakhir bisa center */
+          paddingLeft:  `calc(50% - ${CARD_W / 2}px)`,
+          paddingRight: `calc(50% - ${CARD_W / 2}px)`,
         }}
       >
         {photos.map((p, i) => {
@@ -74,28 +86,25 @@ function MobileCarousel({ photos, onOpen }) {
             <div
               key={i}
               onTouchEnd={() => handleTap(i)}
-              className="relative rounded-2xl overflow-hidden shrink-0 cursor-pointer"
+              className="relative rounded-2xl overflow-hidden shrink-0"
               style={{
                 scrollSnapAlign: 'center',
-                width:     isActive ? '78vw' : '22vw',
-                maxWidth:  isActive ? '320px' : '88px',
-                height:    isActive ? '260px' : '170px',
-                opacity:   isActive ? 1 : 0.7,
-                transform: isActive ? 'scale(1)' : 'scale(0.94)',
-                transition: 'width 0.35s cubic-bezier(0.25,1,0.5,1), height 0.35s cubic-bezier(0.25,1,0.5,1), opacity 0.35s ease, transform 0.35s ease',
+                width:  `${CARD_W}px`,
+                height: '240px',
+                opacity:   isActive ? 1 : 0.6,
+                transform: isActive ? 'scale(1)' : 'scale(0.9)',
+                transition: 'opacity 0.3s ease, transform 0.3s ease',
                 boxShadow: isActive
-                  ? '0 16px 40px rgba(0,0,0,0.22)'
+                  ? '0 12px 32px rgba(0,0,0,0.2)'
                   : '0 4px 12px rgba(0,0,0,0.08)',
               }}
             >
               <img src={p.src} alt="" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
               {isActive && (
-                <>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/30 backdrop-blur-sm text-white text-[10px] px-3 py-1 rounded-full whitespace-nowrap opacity-70">
-                    2× tap untuk perbesar
-                  </div>
-                </>
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/30 backdrop-blur-sm text-white text-[10px] px-3 py-1 rounded-full whitespace-nowrap opacity-80">
+                  2× tap untuk perbesar
+                </div>
               )}
             </div>
           );
@@ -103,9 +112,9 @@ function MobileCarousel({ photos, onOpen }) {
       </div>
 
       {/* Dot indicators */}
-      <div className="flex justify-center gap-1.5 mt-2">
+      <div className="flex justify-center gap-1.5 mt-1">
         {photos.map((_, i) => (
-          <div key={i}
+          <button key={i} onClick={() => scrollTo(i)}
             className="rounded-full transition-all duration-300"
             style={{
               width:  i === activeIdx ? '20px' : '6px',
