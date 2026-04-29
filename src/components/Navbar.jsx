@@ -197,20 +197,57 @@ export default function Navbar() {
 
       {/* ── MOBILE ── */}
       <div className="md:hidden fixed inset-x-0 top-0 z-50">
+
+        {/* Logo besar di tengah — hanya saat belum scroll */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto"
+          style={{
+            top: scrolled || open ? '-100px' : '20px',
+            opacity: scrolled || open ? 0 : 1,
+            transition: 'top 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease',
+            zIndex: 60,
+          }}
+        >
+          <div style={{
+            background: 'rgba(0,0,0,0.25)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            borderRadius: '50%',
+            width: '80px',
+            height: '80px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '1.5px solid rgba(255,255,255,0.2)',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
+          }}>
+            <img src={logo} alt="Bakmi Kertanegara"
+              className="object-contain"
+              style={{ width: '58px', height: '58px' }} />
+          </div>
+        </div>
+
         <header className={`transition-all duration-500 ${
           scrolled && !open ? 'bg-white/95 backdrop-blur-md shadow-soft' : 'bg-transparent'
         }`}>
-          <div className="flex items-center justify-between px-6 py-4">
-            <a href="#home" className="relative z-50">
+          <div className="flex items-center justify-between px-5 py-3.5">
+
+            {/* Logo kecil di navbar — hanya saat scroll */}
+            <a href="#home" className="relative z-50"
+              style={{
+                opacity: scrolled || open ? 1 : 0,
+                transform: scrolled || open ? 'translateX(0)' : 'translateX(-8px)',
+                transition: 'opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1)',
+                pointerEvents: scrolled || open ? 'auto' : 'none',
+              }}>
               <img src={logo} alt="Bakmi Kertanegara"
-                className="h-10 object-contain transition-all duration-500"
-                style={{
-                  filter: 'none',
-                  background: scrolled && !open ? 'transparent' : 'rgba(0,0,0,0.2)',
-                  borderRadius: '12px',
-                  padding: scrolled && !open ? '0' : '4px 8px',
-                }} />
+                className="object-contain"
+                style={{ height: '36px' }} />
             </a>
+
+            {/* Spacer saat belum scroll agar hamburger tetap di kanan */}
+            {!scrolled && !open && <div className="flex-1" />}
+
             <button
               className={`relative z-50 transition-colors duration-300 ${open ? 'text-accent-600' : scrolled ? 'text-slate-700' : 'text-white'}`}
               onClick={() => setOpen(o => !o)} aria-label="Toggle menu">

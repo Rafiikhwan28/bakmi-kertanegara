@@ -32,7 +32,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/15" />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl mx-auto" style={{ paddingTop: 'clamp(100px, 20vw, 0px)' }}>
 
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-5" style={reveal(0)}>
@@ -45,12 +45,12 @@ export default function Hero() {
 
         <h1 className="font-display mb-4" style={reveal(100)}>
           <span className="block text-white font-bold"
-            style={{ fontSize: 'clamp(4rem, 10vw, 8rem)', letterSpacing: '-0.02em', lineHeight: 1.0, textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
+            style={{ fontSize: 'clamp(3.8rem, 9vw, 8rem)', letterSpacing: '-0.02em', lineHeight: 1.0, textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
             Bakmi
           </span>
           <span className="block font-bold italic"
             style={{
-              fontSize: 'clamp(4rem, 10vw, 8rem)',
+              fontSize: 'clamp(3.8rem, 9vw, 8rem)',
               letterSpacing: '-0.02em',
               lineHeight: 1.0,
               color: '#d4347a',

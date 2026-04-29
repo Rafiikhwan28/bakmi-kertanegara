@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useReveal from '../hooks/useReveal';
 import f128 from '../assets/Foto/Fotoinn128.jpg';
 import f132 from '../assets/Foto/Fotoinn132.jpg';
 import f135 from '../assets/Foto/Fotoinn135.jpg';
@@ -8,7 +9,6 @@ import f144 from '../assets/Foto/Fotoinn144.jpg';
 import f149 from '../assets/Foto/Fotoinn149.jpg';
 import f151 from '../assets/Foto/Fotoinn151.jpg';
 import f156 from '../assets/Foto/Fotoinn156.jpg';
-import f157 from '../assets/Foto/Fotoinn157.jpg';
 import f158 from '../assets/Foto/steakLadahitam.jpeg'
 import MenuDetail from './MenuDetail';
 
@@ -167,30 +167,42 @@ const items = [
 ];
 
 export default function Menu() {
-  const [active,   setActive]   = useState('Semua');
-  const [selected, setSelected] = useState(null);
+  const [active,    setActive]    = useState('Semua');
+  const [selected,  setSelected]  = useState(null);
+  const [animating, setAnimating] = useState(false);
+  const [displayed, setDisplayed] = useState('Semua'); // kategori yang sedang ditampilkan
+  const [headerRef, headerVisible] = useReveal(0.1);
+  const [gridRef,   gridVisible]   = useReveal(0.05);
 
-  const filtered = active === 'Semua' ? items : items.filter(i => i.cat === active);
+  const filtered = displayed === 'Semua' ? items : items.filter(i => i.cat === displayed);
+
+  /* Saat kategori berubah: fade out → ganti data → fade in */
+  const handleCategoryChange = (cat) => {
+    if (cat === active || animating) return;
+    setActive(cat);
+    setAnimating(true);
+    setTimeout(() => {
+      setDisplayed(cat);
+      setAnimating(false);
+    }, 280);
+  };
 
   return (
     <>
-      <section id="menu" className="py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="menu" className="py-14 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
 
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div ref={headerRef} className={`flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 md:mb-14 reveal ${headerVisible ? 'visible' : ''}`}>
             <div>
-              <span className="inline-block bg-accent-100 text-accent-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-3 tracking-wider">
-                Pilihan Kami
-              </span>
-              <h2 className="font-display text-5xl md:text-6xl font-black text-slate-900 leading-tight">
+              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-tight">
                 Menu <span className="text-accent-600 italic">Spesial</span>
               </h2>
             </div>
             <div className="flex gap-2 flex-wrap">
               {categories.map(cat => (
-                <button key={cat} onClick={() => setActive(cat)}
-                  className={`px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 ${
+                <button key={cat} onClick={() => handleCategoryChange(cat)}
+                  className={`px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-wide transition-all duration-300 ${
                     active === cat
                       ? 'bg-accent-600 text-white shadow-glow scale-105'
                       : 'bg-slate-100 text-slate-500 hover:bg-accent-100 hover:text-accent-600'
@@ -202,45 +214,49 @@ export default function Menu() {
           </div>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((item) => (
+          <div
+            ref={gridRef}
+            className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5"
+            style={{
+              opacity:   animating ? 0 : 1,
+              transform: animating ? 'translateY(12px)' : 'translateY(0)',
+              transition: 'opacity 0.28s cubic-bezier(0.4,0,0.2,1), transform 0.28s cubic-bezier(0.4,0,0.2,1)',
+            }}
+          >
+            {filtered.map((item, idx) => (
               <div key={item.id} onClick={() => setSelected(item)}
-                className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-soft hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col">
+                className={`reveal ${gridVisible && !animating ? 'visible' : ''} group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col`}
+                style={{ transitionDelay: gridVisible ? `${idx * 55}ms` : '0ms' }}>
 
-                {/* Photo */}
-                <div className="relative overflow-hidden" style={{ height: '220px' }}>
+                {/* Photo — aspect ratio 4:3 agar proporsional */}
+                <div className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
                   <img src={item.img} alt={item.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                   {item.badge && (
-                    <span className="absolute top-3 left-3 bg-accent-600 text-white text-[10px] font-black px-2.5 py-1 rounded-full tracking-wider uppercase shadow-glow">
+                    <span className="absolute top-2 left-2 bg-accent-600 text-white text-[9px] font-black px-2 py-0.5 rounded-full tracking-wider uppercase shadow-glow">
                       {item.badge}
                     </span>
                   )}
                   {item.discount && (
-                    <div className="absolute top-3 right-3 w-11 h-11 bg-green-500 rounded-full flex flex-col items-center justify-center shadow-lg">
-                      <span className="text-white font-black text-sm leading-none">{item.discount}%</span>
-                      <span className="text-white text-[8px] font-bold leading-none">OFF</span>
+                    <div className="absolute top-2 right-2 w-9 h-9 bg-green-500 rounded-full flex flex-col items-center justify-center shadow-lg">
+                      <span className="text-white font-black text-xs leading-none">{item.discount}%</span>
+                      <span className="text-white text-[7px] font-bold leading-none">OFF</span>
                     </div>
                   )}
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur text-accent-600 text-[10px] font-bold px-4 py-1.5 rounded-full shadow transition-all duration-300 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 whitespace-nowrap">
-                    Lihat Detail →
-                  </div>
                 </div>
 
                 {/* Info */}
-                <div className="flex flex-col flex-1 p-5">
-                  <div className="mb-2">
-                    <span className="text-accent-500 text-[10px] font-semibold tracking-widest uppercase">{item.cat}</span>
-                  </div>
-                  <h3 className="font-display text-slate-900 font-bold text-lg leading-snug mb-2 group-hover:text-accent-700 transition-colors duration-200">
+                <div className="flex flex-col flex-1 p-3 md:p-4">
+                  <span className="text-accent-500 text-[9px] font-semibold tracking-widest uppercase mb-1">{item.cat}</span>
+                  <h3 className="font-display text-slate-900 font-bold text-sm md:text-base leading-snug mb-1.5 group-hover:text-accent-700 transition-colors duration-200 line-clamp-2">
                     {item.name}
                   </h3>
-                  <p className="text-slate-400 text-xs leading-relaxed flex-1 mb-4">{item.desc}</p>
-                  <div className="h-px bg-slate-100 mb-4" />
+                  <p className="text-slate-400 text-[11px] leading-relaxed flex-1 mb-2 line-clamp-2">{item.desc}</p>
+                  <div className="h-px bg-slate-100 mb-2" />
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block mb-0.5">Harga</span>
-                    <span className="font-display text-xl font-black text-accent-600">Rp {item.price}</span>
+                    <span className="text-[9px] text-slate-400 uppercase tracking-wider block mb-0.5">Harga</span>
+                    <span className="font-display text-base md:text-lg font-black text-accent-600">Rp {item.price}</span>
                   </div>
                 </div>
               </div>

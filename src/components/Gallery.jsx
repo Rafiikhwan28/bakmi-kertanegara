@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
+import useReveal from '../hooks/useReveal';
 import p1    from '../assets/Foto/Fotoinn128.jpg';
 import p2    from '../assets/Foto/Fotoinn132.jpg';
 import p3    from '../assets/Foto/Fotoinn135.jpg';
@@ -25,7 +26,116 @@ const photos = [
   { src: p10,   label: 'Paket Keluarga',             tag: 'Paket',       span: 'lg:col-span-1 lg:row-span-1' },
 ];
 
-function TiltCard({ children, className, onClick }) {
+/* ── Infinite focus carousel untuk mobile ── */
+function MobileCarousel({ photos, onOpen }) {
+  const [active, setActive]   = useState(0);
+  const [dir,    setDir]      = useState(0); // -1 = prev, 1 = next
+  const [anim,   setAnim]     = useState(false);
+  const startX  = useRef(0);
+  const startY  = useRef(0);
+  const isDrag  = useRef(false);
+
+  const go = useCallback((direction) => {
+    setDir(direction);
+    setAnim(true);
+    setTimeout(() => {
+      setActive(a => (a + direction + photos.length) % photos.length);
+      setAnim(false);
+    }, 320);
+  }, [photos.length]);
+
+  const prev = useCallback(() => go(-1), [go]);
+  const next = useCallback(() => go(1),  [go]);
+
+  const onTouchStart = (e) => {
+    startX.current = e.touches[0].clientX;
+    startY.current = e.touches[0].clientY;
+    isDrag.current = false;
+  };
+  const onTouchMove = (e) => {
+    const dx = Math.abs(e.touches[0].clientX - startX.current);
+    const dy = Math.abs(e.touches[0].clientY - startY.current);
+    if (dx > dy && dx > 8) isDrag.current = true;
+  };
+  const onTouchEnd = (e) => {
+    const dx = e.changedTouches[0].clientX - startX.current;
+    if (isDrag.current && Math.abs(dx) > 40) {
+      dx < 0 ? next() : prev();
+    } else if (!isDrag.current) {
+      onOpen(active);
+    }
+  };
+
+  const indices = [
+    (active - 1 + photos.length) % photos.length,
+    active,
+    (active + 1) % photos.length,
+  ];
+
+  return (
+    <div
+      className="relative w-full overflow-hidden py-4 select-none"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
+      {/* Cards row */}
+      <div className="flex items-center justify-center gap-3 px-4">
+        {indices.map((idx, pos) => {
+          const isActive = pos === 1;
+          const p = photos[idx];
+
+          /* Slide direction: active card slides in from opposite of swipe */
+          const slideX = anim && isActive
+            ? dir > 0 ? '100%' : '-100%'   // entering from right or left
+            : '0%';
+
+          return (
+            <div
+              key={`${idx}-${pos}`}
+              className="relative rounded-2xl overflow-hidden shrink-0"
+              style={{
+                width:    isActive ? '72vw' : '18vw',
+                maxWidth: isActive ? '300px' : '72px',
+                height:   isActive ? '220px' : '130px',
+                opacity:  anim && isActive ? 0 : isActive ? 1 : 0.45,
+                filter:   isActive ? 'none' : 'blur(2.5px)',
+                transform: isActive
+                  ? `scale(1) translateX(${slideX})`
+                  : 'scale(0.9)',
+                transition: anim && isActive
+                  ? 'opacity 0.32s ease, transform 0.32s cubic-bezier(0.16,1,0.3,1)'
+                  : 'all 0.45s cubic-bezier(0.16,1,0.3,1)',
+                boxShadow: isActive ? '0 16px 40px rgba(0,0,0,0.2)' : 'none',
+              }}
+            >
+              <img src={p.src} alt="" className="w-full h-full object-cover" />
+              {isActive && (
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-1.5 mt-4">
+        {photos.map((_, i) => (
+          <button key={i} onClick={() => { const d = i > active ? 1 : -1; setActive(i); setDir(d); }}
+            className="transition-all duration-300 rounded-full"
+            style={{
+              width:  i === active ? '20px' : '6px',
+              height: '6px',
+              background: i === active ? '#8f0b47' : '#e2e8f0',
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TiltCard({ children, className, onClick, style }) {
   const ref = useRef(null);
   const [tilt,  setTilt]  = useState({ x:0, y:0 });
   const [shine, setShine] = useState({ x:50, y:50 });
@@ -43,8 +153,9 @@ function TiltCard({ children, className, onClick }) {
   return (
     <div ref={ref} className={className} onClick={onClick} onMouseMove={onMove} onMouseLeave={onLeave}
       style={{
+        ...style,
         transform: `perspective(800px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-        transition: tilt.x === 0 ? 'transform 0.6s ease' : 'transform 0.1s ease',
+        transition: tilt.x === 0 ? 'transform 0.6s ease, opacity 0.8s cubic-bezier(0.16,1,0.3,1)' : 'transform 0.1s ease',
         willChange: 'transform',
       }}>
       <div className="absolute inset-0 z-20 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -91,7 +202,6 @@ function Lightbox({ photos, index, onClose }) {
         </div>
         <div className="text-center">
           <span className="bg-accent-100 text-accent-700 text-[10px] font-semibold tracking-[0.3em] uppercase px-3 py-1 rounded-full">{p.tag}</span>
-          <p className="font-display text-slate-900 text-xl font-bold mt-2">{p.label}</p>
         </div>
         <div className="flex gap-2 mt-1">
           {photos.map((ph, i) => (
@@ -116,14 +226,15 @@ function Lightbox({ photos, index, onClose }) {
 
 export default function Gallery() {
   const [lightboxIdx, setLightboxIdx] = useState(null);
+  const [headerRef, headerVisible] = useReveal(0.1);
+  const [gridRef,   gridVisible]   = useReveal(0.05);
 
   return (
-    <section id="gallery" className="py-28 bg-gradient-to-b from-white to-accent-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
+    <section id="gallery" className="py-14 md:py-28 bg-gradient-to-b from-white to-accent-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div ref={headerRef} className={`flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16 reveal ${headerVisible ? 'visible' : ''}`}>
           <div>
-            <span className="inline-block bg-accent-100 text-accent-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-3 tracking-wider">Visual</span>
-            <h2 className="font-display text-5xl md:text-6xl font-black text-slate-900 leading-tight">
+            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-tight">
               Galeri <span className="text-accent-600 italic">Foto</span>
             </h2>
           </div>
@@ -132,10 +243,17 @@ export default function Gallery() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:h-[680px]">
+        {/* ── MOBILE: infinite focus carousel ── */}
+        <div className="lg:hidden -mx-4">
+          <MobileCarousel photos={photos} onOpen={(i) => setLightboxIdx(i)} />
+        </div>
+
+        {/* ── DESKTOP: bento grid ── */}
+        <div ref={gridRef} className="hidden lg:grid grid-cols-4 gap-3 h-[680px]">
           {photos.map((p, i) => (
             <TiltCard key={i} onClick={() => setLightboxIdx(i)}
-              className={`relative group rounded-2xl overflow-hidden cursor-pointer ${p.span}`}>
+              className={`relative group rounded-2xl overflow-hidden cursor-pointer ${p.span} reveal ${gridVisible ? 'visible' : ''}`}
+              style={{ transitionDelay: gridVisible ? `${i * 80}ms` : '0ms' }}>
               <img src={p.src} alt={p.label}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 style={{ height: '100%' }} />
@@ -147,7 +265,6 @@ export default function Gallery() {
                 <span className="text-accent-600 text-xs font-bold">⤢</span>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <p className="font-display text-white font-bold text-base leading-tight">{p.label}</p>
                 <p className="text-white/60 text-[11px] mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 tracking-wide">
                   Klik untuk perbesar
                 </p>

@@ -8,7 +8,7 @@ import Footer  from './components/Footer';
 
 function App() {
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen" style={{ opacity: 1, transition: 'opacity 0.4s ease' }}>
       <Navbar />
       <Hero />
       <Menu />
