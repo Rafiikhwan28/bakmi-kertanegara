@@ -1,3 +1,8 @@
-# https://www.robotstxt.org/robotstxt.html
+# robots.txt - Bakmi Kertanegara
+# https://bakmikertanegara.com
+
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap location
+Sitemap: https://bakmikertanegara.com/sitemap.xml
